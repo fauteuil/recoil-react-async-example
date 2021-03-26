@@ -2,8 +2,8 @@ import { atom, selector } from "recoil";
 import { User } from "./types";
 import { getUsers } from "./service";
 
-export const selectedUserIdState = atom<string>({
-  key: "selectedUserIdState",
+export const selectedUserEmailState = atom<string>({
+  key: "selectedUserEmailState",
   default: ""
 });
 
@@ -14,11 +14,11 @@ export const allUsersState = selector<User[]>({
   key: "allUsersState",
   get: async ({ get }) => {
     // Referencing another state element (atom) creates a dependency:
-    // Any change to the value of `selectedUserIdState` will cause
+    // Any change to the value of `selectedUserEmailState` will cause
     // the service request to be made again.
-    const selectedUserId = get(selectedUserIdState);
+    const selectedUserEmail = get(selectedUserEmailState);
     try {
-      const response = await getUsers(selectedUserId);
+      const response = await getUsers();
       // console.log("getUsers called...");
       return response.data || [];
     } catch (error) {
@@ -30,7 +30,7 @@ export const allUsersState = selector<User[]>({
 
 /**
  * This is the atom the UI components will use to display state.
- * When `selectedUserIdState` is updated,
+ * When `selectedUserEmailState` is updated,
  * the service request in `allUsersState.get()` will be called,
  * which will then update `userListState`
  * and trigger a redraw of any UI Components that
