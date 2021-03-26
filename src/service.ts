@@ -1,8 +1,10 @@
 import axios from "axios";
 import { UserApiData } from "./types";
-import { userApiUrl } from "./configuration";
+import { getUserApiUrl } from "./configuration";
 
-export async function getUsers(userId?: string) {
+export async function getUsers() {
+  const userApiUrl = getUserApiUrl();
+  // console.log("userApiUrl", userApiUrl);
   try {
     const response = await axios.get<UserApiData>(userApiUrl);
     return response.data || [];
