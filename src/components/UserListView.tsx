@@ -8,6 +8,10 @@ interface UserListProps {
   ) => (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
+/**
+ * This is the Presentational Component, which receives callback functions
+ * and  data to be displayed via `props`.
+ */
 export const UserListView: FC<UserListProps> = (props) => {
   const { users, handleUserClick } = props;
   return (
